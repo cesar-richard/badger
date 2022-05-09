@@ -1,0 +1,10 @@
+/*@media print {*/
+    @page {
+        size: A4 portrait;
+    }
+/*}*/
+
+.badge {
+    width: 90mm !important;
+    height: 54mm !important;
+}

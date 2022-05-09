@@ -1,0 +1,6 @@
+@page  {
+    size: A4 portrait;
+}
+.badgeColumn {
+    width: 101mm !important;
+}
