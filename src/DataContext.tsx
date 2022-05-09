@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface ContextState {
     badges: [{ firstname: string, lastname: string, jobTitle: string }] | [],
-    addBadge: (data: { created: number, firstname: string; lastname: string; jobTitle: string }) => void;
+    addBadge: (data: { created: number, firstname: string; lastname: string; jobTitle: string }, count: number) => void;
     removeBadge: (id: number) => void;
     clearBadges: () => void;
 }

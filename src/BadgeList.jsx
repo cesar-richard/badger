@@ -80,7 +80,7 @@ function BadgeList() {
                         <Table.Cell>
                             <Button color={"red"} onClick={() => {
                                 context.removeBadge(created)
-                        }}>
+                            }}>
                                 X
                             </Button>
                         </Table.Cell>

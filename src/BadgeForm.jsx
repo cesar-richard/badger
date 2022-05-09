@@ -8,6 +8,7 @@ const BadgeForm = () => {
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
     const [jobTitle, setJobTitle] = React.useState('');
+    const [count, setCount] = React.useState(1);
     return (
         <Container>
             <Form.Group widths='equal'>
@@ -18,24 +19,36 @@ const BadgeForm = () => {
                 </Form.Field>
                 <Form.Field>
                     <label>Nom</label>
-                    <Input fluid placeholder='Nom' value={lastName} onChange={(event, {value}) => setLastName(value)}/>
+                    <Input fluid placeholder='Nom'
+                           value={lastName}
+                           onChange={(event, {value}) => setLastName(value)}
+                    />
                 </Form.Field>
                 <Form.Field>
                     <label>Poste</label>
-                    <Input fluid placeholder='Poste' value={jobTitle}
-                           onChange={(event, {value}) => setJobTitle(value)}/>
+                    <Input fluid placeholder='Poste'
+                           value={jobTitle}
+                           onChange={(event, {value}) => setJobTitle(value)}
+                    />
+                </Form.Field>
+                <Form.Field>
+                    <label>Nombre à generer</label>
+                    <Input fluid placeholder='Poste'
+                           value={count}
+                           onChange={(event, {value}) => setCount(parseInt(value))}
+                    />
                 </Form.Field>
                 <Form.Button primary disabled={firstName === '' && lastName === '' && jobTitle === ''} onClick={() => {
-                    context.addBadge({
-                        firstName,
-                        lastName,
-                        jobTitle,
-                        created: Date.now()
-                    })
-                    setFirstName('');
-                    setLastName('');
-                    setJobTitle('');
-                }
+                        context.addBadge({
+                            firstName,
+                            lastName,
+                            jobTitle,
+                            created: Date.now()
+                        }, count)
+                    }
+                    //setFirstName('');
+                    //setLastName('');
+                    //setJobTitle('');
                 }
                 >
                     Ajouter
