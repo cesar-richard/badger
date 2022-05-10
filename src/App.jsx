@@ -7,6 +7,7 @@ import './App.css'
 import 'typeface-bebas-neue'
 import Document from "./Document";
 import BadgeList from "./BadgeList";
+import DataTable from "./DataTable";
 
 const App = () => {
     const storedBadges = localStorage.getItem('badger_badges') ? JSON.parse(localStorage.getItem('badger_badges')) : [];
@@ -14,6 +15,11 @@ const App = () => {
 
     const panes = [
         {
+            menuItem: 'Table',
+            render: () => <Tab.Pane attached={false}>
+                <DataTable/>
+            </Tab.Pane>,
+        }, {
             menuItem: 'Edit',
             render: () => <Tab.Pane attached={false}>
                 <BadgeForm/>
@@ -55,14 +61,21 @@ const App = () => {
         localStorage.removeItem('badger_badges');
     }
 
+    const updateBadges = (newList) => {
+        console.log(newList)
+        setBadges(newList);
+        localStorage.setItem('badger_badges', JSON.stringify(newList));
+    }
+
     return (
         <DataContext.Provider
             value={React.useMemo(() => ({
                 badges,
                 addBadge,
                 removeBadge,
-                clearBadges
-            }), [badges, addBadge, removeBadge, clearBadges])}>
+                clearBadges,
+                updateBadges
+            }), [badges, addBadge, removeBadge, clearBadges, updateBadges])}>
             <Tab menu={{pointing: true}} panes={panes}/>
         </DataContext.Provider>
     );
