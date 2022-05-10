@@ -9,32 +9,40 @@ const BadgeList = () => {
         generatePdf()
     })
 
+    const generateImageFromElement = async (elem) => {
+        const canvas = await html2canvas(elem, {
+            scale: 1,
+            allowTaint: true,
+            useCORS: true
+        })
+        const img = new Image();
+        img.src = canvas.toDataURL('image/jpeg');
+        return img
+    }
 
     const generatePdf = async () => {
         const arr = document.querySelectorAll(".toRender")
+        const imageBack = await generateImageFromElement(document.querySelector('#backside'))
+
         let i = 0
         const doc = new jsPDF();
-        for(const elem of arr) {
-            const canvas = await html2canvas(elem, {
-                scale: 1,
-                allowTaint: true,
-                useCORS: true
-            })
-            const img = new Image();
-            img.src = canvas.toDataURL('image/jpeg');
+        for (const elem of arr) {
+            const img = await generateImageFromElement(elem)
             doc.addImage({imageData: img, format: 'JPEG', x: 8, y: 0});
-            if(i%5 === 0) {
-                doc.addPage()
-            }
+            //if (i % 5 === 0) {
+            doc.addPage()
+            doc.addImage({imageData: imageBack, format: 'JPEG', x: 8, y: 0});
+            doc.addPage()
+            //}
             i++
         }
-        //doc.save('badger.pdf');
+        doc.save('badger.pdf');
     }
 
     const {badges} = useContext(DataContext);
     const renderedBadges = []
     let i = 0
-    for(const v of badges) {
+    for (const v of badges) {
         if (i % 2 === 0) {
             renderedBadges.push([
                 <Badge
@@ -56,9 +64,9 @@ const BadgeList = () => {
     }
 
     const grouppedBadges = []
-    let tmp=[]
+    let tmp = []
     i = 0
-    for(const v of renderedBadges) {
+    for (const v of renderedBadges) {
         tmp.push(
             <tr>
                 <td className={"badgeColumn"}>
@@ -69,17 +77,56 @@ const BadgeList = () => {
                 </td>
             </tr>
         )
-        if(i%4===0){
+        if (i % 4 === 0) {
             grouppedBadges.push(<div className={"toRender"}>{tmp}</div>)
             tmp = []
         }
         i++
     }
+    if(tmp.length>0) {
+        grouppedBadges.push(<div className={"toRender"}>{tmp}</div>)
+    }
 
     return (
-        <table style={{display: "none"}}>
-            {grouppedBadges}
-        </table>
+        <>
+            <div id="backside">
+                <tr>
+                    <td>
+                        <Badge id="backside" background={'/numbers.png'} />
+                    </td>
+                    <td>
+                        <Badge id="backside" background={'/numbers.png'} />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <Badge id="backside" background={'/numbers.png'} />
+                    </td>
+                    <td>
+                        <Badge id="backside" background={'/numbers.png'} />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <Badge id="backside" background={'/numbers.png'} />
+                    </td>
+                    <td>
+                        <Badge id="backside" background={'/numbers.png'} />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <Badge id="backside" background={'/numbers.png'} />
+                    </td>
+                    <td>
+                        <Badge id="backside" background={'/numbers.png'} />
+                    </td>
+                </tr>
+            </div>
+            <table>
+                {grouppedBadges}
+            </table>
+        </>
     )
 }
 

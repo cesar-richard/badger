@@ -1,43 +1,35 @@
 import React from 'react'
 import BadgeForm from "./BadgeForm"
-import BadgeList from "./BadgeList";
+import BadgesTable from "./BadgesTable";
 import DataContext from "./DataContext"
-import Badge from "./Badge";
-import {Grid, Tab} from "semantic-ui-react";
+import {Tab} from "semantic-ui-react";
 import './App.css'
 import 'typeface-bebas-neue'
 import Document from "./Document";
+import BadgeList from "./BadgeList";
 
 const App = () => {
     const storedBadges = localStorage.getItem('badger_badges') ? JSON.parse(localStorage.getItem('badger_badges')) : [];
     const [badges, setBadges] = React.useState(storedBadges);
 
     const panes = [
-
-        {
-            menuItem: 'Print',
-            render: () => <Tab.Pane attached={false}>
-                <Document/>
-            </Tab.Pane>,
-        },
         {
             menuItem: 'Edit',
             render: () => <Tab.Pane attached={false}>
                 <BadgeForm/>
-                <BadgeList/>
+                <BadgesTable/>
             </Tab.Pane>,
         },
         {
             menuItem: 'Preview',
             render: () => <Tab.Pane attached={false}>
-                <Grid columns={2} centered>
-                    <Grid.Column className={"badgeColumn"}>
-                        {leftColumn}
-                    </Grid.Column>
-                    <Grid.Column className={"badgeColumn"}>
-                        {rightColumn}
-                    </Grid.Column>
-                </Grid>
+                <BadgeList badges={badges}/>
+            </Tab.Pane>,
+        },
+        {
+            menuItem: 'Print',
+            render: () => <Tab.Pane attached={false}>
+                <Document/>
             </Tab.Pane>,
         },
     ]
@@ -62,13 +54,6 @@ const App = () => {
         setBadges([]);
         localStorage.removeItem('badger_badges');
     }
-
-    const rightColumn = badges.filter((v, i) => {
-        return i % 2 === 1
-    }).map(v => <Badge jobTitle={v.jobTitle} lastName={v.lastName} firstName={v.firstName} background={"/bg.png"}/>)
-    const leftColumn = badges.filter((v, i) => {
-        return i % 2 === 0
-    }).map(v => <Badge jobTitle={v.jobTitle} lastName={v.lastName} firstName={v.firstName} background={"/bg.png"}/>)
 
     return (
         <DataContext.Provider
