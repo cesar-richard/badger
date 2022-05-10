@@ -11,6 +11,11 @@ export default function DataTable() {
         for (const v of badges) {
             initialTable.push([{value: v.firstName}, {value: v.lastName}, {value: v.jobTitle}])
         }
+        initialTable.push([
+            {value: ""},
+            {value: ""},
+            {value: ""}
+        ]);
     } else {
         for (let i = 0; i < 25; i++) {
             initialTable.push([
@@ -39,7 +44,7 @@ export default function DataTable() {
                 </Table>
             )}
             onCellsChanged={(changes, additions) => {
-                changes.forEach(({cell, row, col, value}) => {
+                changes.forEach(({row, col, value}) => {
                     dataGrid[row][col] = {...dataGrid[row][col], value};
                 });
                 if (additions) {
@@ -52,6 +57,12 @@ export default function DataTable() {
                         }
                     });
                 }
+
+                const lastRow = dataGrid[dataGrid.length-1]
+                if (lastRow[0].value !== '' || lastRow[2].value !== '' || lastRow[2].value !== '') {
+                    dataGrid.push([{value: ""}, {value: ""}, {value: ""}])
+                }
+
                 const date = Date.now();
 
                 updateBadges(

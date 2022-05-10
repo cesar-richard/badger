@@ -54,7 +54,6 @@ const App = () => {
     }
 
     const updateBadges = (newList) => {
-        console.log(newList)
         setBadges(newList);
         localStorage.setItem('badger_badges', JSON.stringify(newList));
     }
