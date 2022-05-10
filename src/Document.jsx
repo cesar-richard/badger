@@ -103,7 +103,7 @@ const BadgeList = () => {
                 Télécharger
             </Button>
             {working &&
-                <Progress value={step} total={document.querySelectorAll(".toRender").length*2} progress='ratio'/>
+                <Progress value={step} total={document.querySelectorAll(".toRender").length * 2} progress='ratio'/>
             }
             <div id="backside" style={{display: "none"}}>
                 <tr>

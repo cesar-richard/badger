@@ -5,7 +5,7 @@ import './App.css'
 import 'typeface-bebas-neue'
 import Document from "./Document";
 import BadgeList from "./BadgeList";
-import DataTable from "./DataTable";
+import DataTable from "./DataTable/DataTable";
 
 const App = () => {
     const storedBadges = localStorage.getItem('badger_badges') ? JSON.parse(localStorage.getItem('badger_badges')) : [];
