@@ -1,6 +1,4 @@
 import React from 'react'
-import BadgeForm from "./BadgeForm"
-import BadgesTable from "./BadgesTable";
 import DataContext from "./DataContext"
 import {Tab} from "semantic-ui-react";
 import './App.css'
@@ -15,15 +13,9 @@ const App = () => {
 
     const panes = [
         {
-            menuItem: 'Table',
-            render: () => <Tab.Pane attached={false}>
-                <DataTable/>
-            </Tab.Pane>,
-        }, {
             menuItem: 'Edit',
             render: () => <Tab.Pane attached={false}>
-                <BadgeForm/>
-                <BadgesTable/>
+                <DataTable/>
             </Tab.Pane>,
         },
         {

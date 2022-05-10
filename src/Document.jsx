@@ -1,20 +1,22 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useState} from 'react'
 import html2canvas from "html2canvas";
 import {jsPDF} from "jspdf";
 import Badge from "./Badge";
 import DataContext from "./DataContext";
+import {Button, Progress} from "semantic-ui-react";
 
 const BadgeList = () => {
-    useEffect(() => {
-        generatePdf()
-    })
+    const [working, setWorking] = useState(false);
+    const [step, setStep] = useState(0)
 
     const generateImageFromElement = async (elem) => {
+        elem.style.display = 'block'
         const canvas = await html2canvas(elem, {
             scale: 1,
             allowTaint: true,
-            useCORS: true
+            useCORS: true,
         })
+        elem.style.display = 'none'
         const img = new Image();
         img.src = canvas.toDataURL('image/jpeg');
         return img
@@ -29,14 +31,16 @@ const BadgeList = () => {
         for (const elem of arr) {
             const img = await generateImageFromElement(elem)
             doc.addImage({imageData: img, format: 'JPEG', x: 8, y: 0});
-            //if (i % 5 === 0) {
             doc.addPage()
+            setStep(++i)
             doc.addImage({imageData: imageBack, format: 'JPEG', x: 8, y: 0});
             doc.addPage()
-            //}
-            i++
+            setStep(++i)
         }
+        doc.deletePage(doc.internal.getNumberOfPages());
         doc.save('badger.pdf');
+        setWorking(false)
+        setStep(0)
     }
 
     const {badges} = useContext(DataContext);
@@ -78,7 +82,7 @@ const BadgeList = () => {
             </tr>
         )
         if (i % 4 === 0) {
-            grouppedBadges.push(<div className={"toRender"}>{tmp}</div>)
+            grouppedBadges.push(<div className={"toRender"} style={{display: "none"}}>{tmp}</div>)
             tmp = []
         }
         i++
@@ -89,7 +93,19 @@ const BadgeList = () => {
 
     return (
         <>
-            <div id="backside">
+            <Button
+                primary
+                disabled={working}
+                onClick={() => {
+                    setWorking(true);
+                    generatePdf()
+                }}>
+                Télécharger
+            </Button>
+            {working &&
+                <Progress value={step} total={document.querySelectorAll(".toRender").length*2} progress='ratio'/>
+            }
+            <div id="backside" style={{display: "none"}}>
                 <tr>
                     <td>
                         <Badge id="backside" background={'/numbers.png'}/>
