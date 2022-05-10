@@ -83,7 +83,7 @@ const BadgeList = () => {
         }
         i++
     }
-    if(tmp.length>0) {
+    if (tmp.length > 0) {
         grouppedBadges.push(<div className={"toRender"}>{tmp}</div>)
     }
 
@@ -92,34 +92,34 @@ const BadgeList = () => {
             <div id="backside">
                 <tr>
                     <td>
-                        <Badge id="backside" background={'/numbers.png'} />
+                        <Badge id="backside" background={'/numbers.png'}/>
                     </td>
                     <td>
-                        <Badge id="backside" background={'/numbers.png'} />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <Badge id="backside" background={'/numbers.png'} />
-                    </td>
-                    <td>
-                        <Badge id="backside" background={'/numbers.png'} />
+                        <Badge id="backside" background={'/numbers.png'}/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <Badge id="backside" background={'/numbers.png'} />
+                        <Badge id="backside" background={'/numbers.png'}/>
                     </td>
                     <td>
-                        <Badge id="backside" background={'/numbers.png'} />
+                        <Badge id="backside" background={'/numbers.png'}/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <Badge id="backside" background={'/numbers.png'} />
+                        <Badge id="backside" background={'/numbers.png'}/>
                     </td>
                     <td>
-                        <Badge id="backside" background={'/numbers.png'} />
+                        <Badge id="backside" background={'/numbers.png'}/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <Badge id="backside" background={'/numbers.png'}/>
+                    </td>
+                    <td>
+                        <Badge id="backside" background={'/numbers.png'}/>
                     </td>
                 </tr>
             </div>
