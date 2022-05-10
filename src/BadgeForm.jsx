@@ -39,13 +39,13 @@ const BadgeForm = () => {
                     />
                 </Form.Field>
                 <Form.Button primary disabled={firstName === '' && lastName === '' && jobTitle === ''} onClick={() => {
-                        context.addBadge({
-                            firstName,
-                            lastName,
-                            jobTitle,
-                            created: Date.now()
-                        }, count)
-                    }
+                    context.addBadge({
+                        firstName,
+                        lastName,
+                        jobTitle,
+                        created: Date.now()
+                    }, count)
+                }
                     //setFirstName('');
                     //setLastName('');
                     //setJobTitle('');

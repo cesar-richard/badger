@@ -3,18 +3,49 @@ import BadgeForm from "./BadgeForm"
 import BadgeList from "./BadgeList";
 import DataContext from "./DataContext"
 import Badge from "./Badge";
-import {Grid} from "semantic-ui-react";
+import {Grid, Tab} from "semantic-ui-react";
 import './App.css'
 import 'typeface-bebas-neue'
+import Document from "./Document";
 
 const App = () => {
     const storedBadges = localStorage.getItem('badger_badges') ? JSON.parse(localStorage.getItem('badger_badges')) : [];
     const [badges, setBadges] = React.useState(storedBadges);
 
+    const panes = [
+
+        {
+            menuItem: 'Print',
+            render: () => <Tab.Pane attached={false}>
+                <Document/>
+            </Tab.Pane>,
+        },
+        {
+            menuItem: 'Edit',
+            render: () => <Tab.Pane attached={false}>
+                <BadgeForm/>
+                <BadgeList/>
+            </Tab.Pane>,
+        },
+        {
+            menuItem: 'Preview',
+            render: () => <Tab.Pane attached={false}>
+                <Grid columns={2} centered>
+                    <Grid.Column className={"badgeColumn"}>
+                        {leftColumn}
+                    </Grid.Column>
+                    <Grid.Column className={"badgeColumn"}>
+                        {rightColumn}
+                    </Grid.Column>
+                </Grid>
+            </Tab.Pane>,
+        },
+    ]
+
     const addBadge = (badge, count) => {
         const toAdd = [];
         for (let i = 0; i < count; i++) {
-            toAdd.push({...badge, created: badge.created+i})
+            toAdd.push({...badge, created: badge.created + i})
         }
         const newList = [...badges, ...toAdd]
         setBadges(newList);
@@ -47,16 +78,7 @@ const App = () => {
                 removeBadge,
                 clearBadges
             }), [badges, addBadge, removeBadge, clearBadges])}>
-            <Grid columns={2} centered>
-                <Grid.Column className={"badgeColumn"}>
-                    {leftColumn}
-                </Grid.Column>
-                <Grid.Column className={"badgeColumn"}>
-                    {rightColumn}
-                </Grid.Column>
-            </Grid>
-            <BadgeForm/>
-            <BadgeList/>
+            <Tab menu={{pointing: true}} panes={panes}/>
         </DataContext.Provider>
     );
 }

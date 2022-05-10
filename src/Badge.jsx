@@ -14,7 +14,11 @@ const Badge = ({firstName, lastName, jobTitle, background}) => {
             <div style={{position: "relative", top: "25mm"}}>
                 {firstName} {lastName}
             </div>
-            <div style={{position: "relative", fontSize: firstName===""&&lastName===""?"24pt":"18pt", top: firstName===""&&lastName===""?"30mm":"35mm"}}>
+            <div style={{
+                position: "relative",
+                fontSize: firstName === "" && lastName === "" ? "24pt" : "18pt",
+                top: firstName === "" && lastName === "" ? "30mm" : "35mm"
+            }}>
                 {jobTitle}
             </div>
         </div>

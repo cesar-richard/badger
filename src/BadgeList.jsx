@@ -4,7 +4,7 @@ import {Button, Table} from 'semantic-ui-react'
 import DataContext from "./DataContext";
 
 
-function exampleReducer(state, action) {
+function tableReducer(state, action) {
     switch (action.type) {
         case 'CHANGE_SORT':
             if (state.column === action.column) {
@@ -33,7 +33,7 @@ function exampleReducer(state, action) {
 
 function BadgeList() {
     const context = useContext(DataContext);
-    const [state, dispatch] = React.useReducer(exampleReducer, {
+    const [state, dispatch] = React.useReducer(tableReducer, {
         column: null,
         data: context.badges,
         direction: null,
