@@ -73,10 +73,10 @@ const BadgeList = () => {
     for (const v of renderedBadges) {
         tmp.push(
             <tr>
-                <td className={"badgeColumn"}>
+                <td>
                     {v[0]}
                 </td>
-                <td className={"badgeColumn"}>
+                <td>
                     {v[1]}
                 </td>
             </tr>
@@ -108,39 +108,41 @@ const BadgeList = () => {
                     progress='ratio'
                 />
             }
-            <div id="backside" style={{display: "none"}}>
-                <tr>
-                    <td>
-                        <Badge id="backside" background={versoImg}/>
-                    </td>
-                    <td>
-                        <Badge id="backside" background={versoImg}/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <Badge id="backside" background={versoImg}/>
-                    </td>
-                    <td>
-                        <Badge id="backside" background={versoImg}/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <Badge id="backside" background={versoImg}/>
-                    </td>
-                    <td>
-                        <Badge id="backside" background={versoImg}/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <Badge id="backside" background={versoImg}/>
-                    </td>
-                    <td>
-                        <Badge id="backside" background={versoImg}/>
-                    </td>
-                </tr>
+            <div id="backside" style={{display: "block"}}>
+                <table>
+                    <tr>
+                        <td>
+                            <Badge background={versoImg}/>
+                        </td>
+                        <td>
+                            <Badge background={versoImg}/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Badge background={versoImg}/>
+                        </td>
+                        <td>
+                            <Badge background={versoImg}/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Badge background={versoImg}/>
+                        </td>
+                        <td>
+                            <Badge background={versoImg}/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Badge background={versoImg}/>
+                        </td>
+                        <td>
+                            <Badge background={versoImg}/>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <table>
                 {grouppedBadges}

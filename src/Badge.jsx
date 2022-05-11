@@ -7,7 +7,6 @@ const Badge = ({firstName, lastName, jobTitle, background}) => {
             fontFamily: 'Bebas Neue',
             textAlign: "center",
             fontSize: "24pt",
-            margin: "1mm",
             backgroundSize: "cover",
             backgroundImage: `url(${background})`
         }}>
