@@ -43,7 +43,7 @@ const BadgeList = () => {
         setStep(0)
     }
 
-    const {badges} = useContext(DataContext);
+    const {badges, rectoImg, versoImg} = useContext(DataContext);
     const renderedBadges = []
     let i = 0
     for (const v of badges) {
@@ -53,14 +53,14 @@ const BadgeList = () => {
                     jobTitle={v.jobTitle}
                     lastName={v.lastName}
                     firstName={v.firstName}
-                    background={"/bg.png"}
+                    background={rectoImg}
                 />,
                 badges[i + 1] ?
                     <Badge
                         jobTitle={badges[i + 1].jobTitle}
                         lastName={badges[i + 1].lastName}
                         firstName={badges[i + 1].firstName}
-                        background={"/bg.png"}
+                        background={rectoImg}
                     /> : null
             ])
         }
@@ -108,34 +108,34 @@ const BadgeList = () => {
             <div id="backside" style={{display: "none"}}>
                 <tr>
                     <td>
-                        <Badge id="backside" background={'/numbers.png'}/>
+                        <Badge id="backside" background={versoImg}/>
                     </td>
                     <td>
-                        <Badge id="backside" background={'/numbers.png'}/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <Badge id="backside" background={'/numbers.png'}/>
-                    </td>
-                    <td>
-                        <Badge id="backside" background={'/numbers.png'}/>
+                        <Badge id="backside" background={versoImg}/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <Badge id="backside" background={'/numbers.png'}/>
+                        <Badge id="backside" background={versoImg}/>
                     </td>
                     <td>
-                        <Badge id="backside" background={'/numbers.png'}/>
+                        <Badge id="backside" background={versoImg}/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <Badge id="backside" background={'/numbers.png'}/>
+                        <Badge id="backside" background={versoImg}/>
                     </td>
                     <td>
-                        <Badge id="backside" background={'/numbers.png'}/>
+                        <Badge id="backside" background={versoImg}/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <Badge id="backside" background={versoImg}/>
+                    </td>
+                    <td>
+                        <Badge id="backside" background={versoImg}/>
                     </td>
                 </tr>
             </div>

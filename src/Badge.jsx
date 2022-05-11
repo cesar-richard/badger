@@ -9,7 +9,7 @@ const Badge = ({firstName, lastName, jobTitle, background}) => {
             fontSize: "24pt",
             margin: "1mm",
             backgroundSize: "cover",
-            backgroundImage: `url(${process.env.PUBLIC_URL + background})`
+            backgroundImage: `url(${background})`
         }}>
             <div style={{position: "relative", top: "25mm"}}>
                 {firstName} {lastName}

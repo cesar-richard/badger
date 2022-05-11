@@ -5,15 +5,15 @@ import Badge from "./Badge";
 
 
 const BadgeList = () => {
-    const {badges} = useContext(DataContext);
+    const {badges, rectoImg} = useContext(DataContext);
     const rightColumn = badges.filter((v, i) => {
         return i % 2 === 1
     }).map((v, i) => <Badge key={i} jobTitle={v.jobTitle} lastName={v.lastName} firstName={v.firstName}
-                            background={"/bg.png"}/>)
+                            background={rectoImg}/>)
     const leftColumn = badges.filter((v, i) => {
         return i % 2 === 0
     }).map((v, i) => <Badge key={i} jobTitle={v.jobTitle} lastName={v.lastName} firstName={v.firstName}
-                            background={"/bg.png"}/>)
+                            background={rectoImg}/>)
 
     return (
         <Grid columns={2} centered>

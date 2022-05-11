@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import DataContext from "./DataContext"
 import {Tab} from "semantic-ui-react";
 import './App.css'
@@ -6,15 +6,23 @@ import 'typeface-bebas-neue'
 import Document from "./Document";
 import BadgeList from "./BadgeList";
 import DataTable from "./DataTable/DataTable";
+import FileSelector from "./FileSelector";
 
 const App = () => {
     const storedBadges = localStorage.getItem('badger_badges') ? JSON.parse(localStorage.getItem('badger_badges')) : [];
+    const storedBackgrounds = localStorage.getItem('badger_backgrounds') ? JSON.parse(localStorage.getItem('badger_backgrounds')) : {
+        recto: null,
+        verso: null
+    };
     const [badges, setBadges] = React.useState(storedBadges);
+    const [rectoImg, setRectoImg] = useState(storedBackgrounds.recto)
+    const [versoImg, setVersoImg] = useState(storedBackgrounds.verso)
 
     const panes = [
         {
             menuItem: 'Edit',
             render: () => <Tab.Pane attached={false}>
+                <FileSelector/>
                 <DataTable/>
             </Tab.Pane>,
         },
@@ -58,15 +66,24 @@ const App = () => {
         localStorage.setItem('badger_badges', JSON.stringify(newList));
     }
 
+    const updateBackgrounds = (recto, verso) => {
+        setRectoImg(recto)
+        setVersoImg(verso)
+        localStorage.setItem('badger_backgrounds', JSON.stringify({recto, verso}));
+    }
+
     return (
         <DataContext.Provider
             value={React.useMemo(() => ({
                 badges,
+                rectoImg,
+                versoImg,
                 addBadge,
                 removeBadge,
                 clearBadges,
-                updateBadges
-            }), [badges, addBadge, removeBadge, clearBadges, updateBadges])}>
+                updateBadges,
+                updateBackgrounds
+            }), [badges, rectoImg, versoImg, addBadge, removeBadge, clearBadges, updateBadges, updateBackgrounds])}>
             <Tab menu={{pointing: true}} panes={panes}/>
         </DataContext.Provider>
     );
