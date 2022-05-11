@@ -24,15 +24,15 @@ const BadgeList = () => {
 
     const generatePdf = async () => {
         const arr = document.querySelectorAll(".toRender")
-        const imageBack = await generateImageFromElement(document.querySelector('#backside'))
-
         let i = 0
+        const imageBack = await generateImageFromElement(document.querySelector('#backside'))
+        setStep(++i)
+
         const doc = new jsPDF();
         for (const elem of arr) {
             const img = await generateImageFromElement(elem)
             doc.addImage({imageData: img, format: 'JPEG', x: 8, y: 0});
             doc.addPage()
-            setStep(++i)
             doc.addImage({imageData: imageBack, format: 'JPEG', x: 8, y: 0});
             doc.addPage()
             setStep(++i)
@@ -81,11 +81,10 @@ const BadgeList = () => {
                 </td>
             </tr>
         )
-        if (i % 4 === 0) {
+        if (++i % 4 === 0) {
             grouppedBadges.push(<div className={"toRender"} style={{display: "none"}}>{tmp}</div>)
             tmp = []
         }
-        i++
     }
     if (tmp.length > 0) {
         grouppedBadges.push(<div className={"toRender"}>{tmp}</div>)
@@ -103,7 +102,11 @@ const BadgeList = () => {
                 Télécharger
             </Button>
             {working &&
-                <Progress value={step} total={document.querySelectorAll(".toRender").length * 2} progress='ratio'/>
+                <Progress
+                    value={step}
+                    total={document.querySelectorAll(".toRender").length + 1}
+                    progress='ratio'
+                />
             }
             <div id="backside" style={{display: "none"}}>
                 <tr>
